@@ -301,6 +301,10 @@ body {
     background-color: var(--color-menu-hover);
     color: var(--color-menu-hover-texto);
 }
+#añadir-estudiante{
+    background-color: var(--color-menu-hover);
+    color: var(--color-menu-hover-texto);
+}
 main {
     margin-left: 250px;
     padding: 20px;

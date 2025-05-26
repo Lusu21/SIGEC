@@ -1,47 +1,29 @@
-new DataTable('#example', {
-    dom :  "<'row'<'col-sm-6 d-flex align-items-center'lB><'col-sm-6 mt-2 mb-3'f>>" + // Selector de registros y búsqueda
-    "<'row'<'col-sm-12'tr>>" +                                               // Tabla en la segunda fila
-    "<'row'<'col-sm-6'i><'col-sm-6 text-end'p>>",
-    
+// Inicialización de DataTable
+$('#example').DataTable({
+    dom: "<'row'<'col-sm-6 d-flex align-items-center'lB><'col-sm-6 mt-2 mb-3'f>>" +
+         "<'row'<'col-sm-12'tr>>" +
+         "<'row'<'col-sm-6'i><'col-sm-6 text-end'p>>",
     buttons: [
         {
             extend: "excelHtml5",
-            text: '<ion-icon name="receipt-sharp"></ion-icon>', // Icono de Excel
-            titleAttr: "Exportar a Excel", // Texto al pasar el mouse
-            className: "btn btn-success", // Clase de Bootstrap
+            text: '<ion-icon name="receipt-sharp"></ion-icon>',
+            titleAttr: "Exportar a Excel",
+            className: "btn btn-success"
         },
         {
             extend: "pdfHtml5",
-            text: '<ion-icon name="document"></ion-icon>', // Icono de PDF
-            titleAttr: "Exportar a PDF", // Texto al pasar el mouse
-            className: "btn btn-danger", // Clase de Bootstrap
+            text: '<ion-icon name="document"></ion-icon>',
+            titleAttr: "Exportar a PDF",
+            className: "btn btn-danger"
         },
         {
             extend: "print",
-            text: '<ion-icon name="print"></ion-icon>', // Icono de imprimir
-            titleAttr: "Imprimir", // Texto al pasar el mouse
-            className: "btn btn-info", // Clase de Bootstrap
-        },
-        {
-            extend: "collection",
-            text: '<ion-icon name="person-add"></ion-icon>', // Icono de imprimir
-            titleAttr: "Agregar Estudiante", // Texto al pasar el mouse
-            className: "btn btn-primary", // Clase de Bootstrap
-            action: function (e, dt, node, config){
-                const modal = new bootstrap.Modal(document.getElementById('agregar_estudiante'));
-                modal.show(); 
-            }
-        },
-       
-
-    ], 
-    lengthMenu: [5, 10, 20, 50, 100,], // Opciones de cantidad de registros a mostrar
-    columnDefs: [
-       // { orderable: false, targets: [] }, // Columnas no ordenables
-       // { searchable: false, targets: [] }, // Columnas no buscables
-       // {width: "10%", targets: []}, // Ancho de las columnas
+            text: '<ion-icon name="print"></ion-icon>',
+            titleAttr: "Imprimir",
+            className: "btn btn-info"
+        }
     ],
-    //pageLength: 5, // Cantidad de registros por página
+    lengthMenu: [5, 10, 20, 50, 100],
     language: {
         search: "Buscar:",
         info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
@@ -52,51 +34,157 @@ new DataTable('#example', {
             last: "Último",
             next: "Siguiente",
             previous: "Anterior"
+        }
+    }
+});
+
+// Al hacer clic en editar, cargar datos en el modal
+$(document).on('click', '.editar', function() {
+    var id = $(this).data('id');
+    $.ajax({
+        url: 'bd/recibir.php',
+        type: 'POST',
+        data: { id: id },
+        dataType: 'json',
+        success: function(data) {
+            console.log(data); // Para depuración
+            if(data && !data.error){
+                $('#ID').val(data.ID);
+                $('#Nombres').val(data.Nombres);
+                $('#Apellidos').val(data.Apellidos);
+                $('#Cedula_Identidad_o_Estudiantil').val(data['Cedula Identidad o Estudiantil']);
+                $('#Representante').val(data.Representante);
+                $('#Telefono').val(data.Telefono);
+                $('#Sexo').val(data.Sexo);
+                $('#Lugar_Nacimiento').val(data['Lugar Nacimiento']);
+                $('#Entidad_Federal').val(data['Entidad Federal']);
+                $('#Etnia').val(data.Etnia);
+                $('#Fecha_de_Nacimiento').val(data['Fecha de Nacimiento']);
+                $('#Edad').val(data.Edad);
+                $('#Correo_Estudiante').val(data['Correo Estudiante']);
+                $('#Direccion_Estudiante').val(data['Direccion Estudiante']);
+                $('#Posee_Discapacidad').val(data['Posee Discapacidad']);
+                $('#Carnet_Discapacidad').val(data['Carnet Discapacidad']);
+                $('#Recibe_Apoyo_Especial').val(data['Recibe Apoyo Especial']);
+                $('#Recibe_Apoyo_de_Otro_Organismo').val(data['Recibe Apoyo de Otro Organismo']);
+                $('#Recibe_Ayuda_Tecnica').val(data['Recibe Ayuda Tecnica']);
+                $('#Embarazo').val(data.Embarazo);
+                $('#Tiene_Control').val(data['Tiene Control']);
+                $('#Medico_Tratante').val(data['Medico Tratante']);
+                $('#Centro_Hospitalario').val(data['Centro Hospitalario']);
+                $('#Pantalon').val(data.Pantalon);
+                $('#Camisa').val(data.Camisa);
+                $('#Zapato').val(data.Zapato);
+                $('#Año').val(data.Año);
+                $('#Seccion').val(data.Seccion);
+                $('#Cedula_Representante').val(data['Cedula Representante']);
+                $('#Parentesco').val(data.Parentesco);
+                $('#Autor_Autorizado').val(data['Autor Autorizado']);
+                $('#Correo_Representante').val(data['Correo Representante']);
+                $('#Direccion_Representante').val(data['Direccion Representante']);
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'No se encontraron datos del estudiante.'
+                });
+            }
         },
-    }, // Lenguaje de la tabla
-       
-});
-
-// Validación del campo "nombreEstudiante"
-document.getElementById('nombreEstudiante').addEventListener('input', function (event) {
-    const input = event.target;
-    input.value = input.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, ''); // Permite solo letras y espacios
-});
-
-// Validación del campo "apellidoEstudiante"
-document.getElementById('apellidoEstudiante').addEventListener('input', function (event) {
-    const input = event.target;
-    input.value = input.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, ''); // Permite solo letras y espacios
-});
-
-document.addEventListener('DOMContentLoaded', function () {
-    const cedulaInput = document.getElementById('cedulaEstudiante');
-
-    // Validar que solo se ingresen números y limitar a 8 caracteres
-    cedulaInput.addEventListener('input', function (event) {
-        const input = event.target;
-        input.value = input.value.replace(/[^0-9]/g, ''); // Permite solo números
-        if (input.value.length > 8) {
-            input.value = input.value.slice(0, 8); // Limita a 8 caracteres
+        error: function(xhr, status, error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Error en la petición AJAX: ' + error
+            });
         }
     });
 });
 
-document.addEventListener('DOMContentLoaded', function () {
-    const form = document.getElementById('formAgregarEstudiante');
-    const inputs = form.querySelectorAll('input');
-
-    inputs.forEach((input, index) => {
-        input.addEventListener('keydown', function (event) {
-            if (event.key === 'Enter') {
-                event.preventDefault(); // Evita que el formulario se envíe
-                const nextInput = inputs[index + 1]; // Obtiene el siguiente campo
-                if (nextInput) {
-                    nextInput.focus(); // Mueve el foco al siguiente campo
-                } else {
-                    form.querySelector('button[type="submit"]').focus(); // Si no hay más campos, enfoca el botón "Guardar"
-                }
+// Al enviar el formulario, actualizar datos
+$('#formEditar').on('submit', function(e){
+    e.preventDefault();
+    $.ajax({
+        url: 'bd/actualizar_estudiante.php',
+        type: 'POST',
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function(resp){
+            console.log(resp); // Para depuración
+            if(resp.success){
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Actualizado!',
+                    text: 'Estudiante actualizado correctamente',
+                    timer: 1800,
+                    showConfirmButton: false
+                });
+                $('#modalEditar').modal('hide');
+                setTimeout(function(){
+                    location.reload();
+                }, 1800);
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'No se pudo actualizar el estudiante'
+                });
             }
-        });
+        },
+        error: function(xhr, status, error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Error en la petición AJAX: ' + error
+            });
+        }
     });
-})
+});
+
+// Eliminar estudiante con SweetAlert2
+$(document).on('click', '.eliminar', function(){
+    var id = $(this).data('id');
+    Swal.fire({
+        title: '¿Estás seguro?',
+        text: "¡Esta acción no se puede deshacer!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Eliminar',
+        cancelButtonText: 'Cancelar'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: 'bd/eliminar_estudiante.php',
+                type: 'POST',
+                data: { id: id },
+                dataType: 'json',
+                success: function(resp){
+                    if(resp.success){
+                        Swal.fire(
+                            '¡Eliminado!',
+                            'El estudiante ha sido eliminado.',
+                            'success'
+                        );
+                        setTimeout(function(){
+                            location.reload();
+                        }, 1200);
+                    } else {
+                        Swal.fire(
+                            'Error',
+                            'No se pudo eliminar el estudiante',
+                            'error'
+                        );
+                    }
+                },
+                error: function(){
+                    Swal.fire(
+                        'Error',
+                        'Error en la petición AJAX',
+                        'error'
+                    );
+                }
+            });
+        }
+    });
+});
