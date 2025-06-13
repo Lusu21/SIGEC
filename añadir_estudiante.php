@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar Estudiante</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
     <style>
         #formEstudiante input,
@@ -77,9 +77,15 @@
         <nav class="navegacion">
             <ul>
                 <li>
-                    <a href="index.html">
+                    <a href="dashboard.php">
                         <ion-icon name="desktop-outline"></ion-icon>
                         <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="usuarios.php">
+                        <ion-icon name="people-outline"></ion-icon>
+                        <span>Usuarios</span>
                     </a>
                 </li>
                 <li>
@@ -94,10 +100,16 @@
                         <span>Añadir Estudiante</span>
                     </a>
                 </li>
+                    <li>
+                    <a href="materias.php">
+                        <ion-icon name="library-outline"></ion-icon>
+                        <span>Materias</span>
+                    </a>
+                </li>
                 <li>
-                    <a href="#">
-                        <ion-icon name="document-text-outline"></ion-icon>
-                        <span>Documentos</span>
+                    <a href="profesores.php">
+                        <ion-icon name="easel-outline"></ion-icon>
+                        <span>Profesores</span>
                     </a>
                 </li>
                 <li>
@@ -142,7 +154,7 @@
     <!-- Contenido principal -->
     <main class="contenido-principal">
         <div class="form-container">
-            <h5 class="section-title">Registro de Estudiante</h5>
+            <h1 class="section-title">Registro de Estudiante</h1>
             <form id="formEstudiante" method="POST" action="bd/guardar_estudiante.php">
                 <!-- Información Personal -->
                 <div class="card compact-card border-primary">
@@ -385,7 +397,7 @@
     <script src="js/sweetalert2.all.min.js"></script>    
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
     <script src="js/script.js"></script>
     <script>
 const seccionesPorAno = {

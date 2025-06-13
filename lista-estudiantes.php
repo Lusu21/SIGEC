@@ -37,9 +37,15 @@ $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
         <nav class="navegacion">
             <ul>
                 <li>
-                    <a href="index.html">
+                    <a href="dashboard.php">
                         <ion-icon name="desktop-outline"></ion-icon>
                         <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="usuarios.php">
+                        <ion-icon name="people-outline"></ion-icon>
+                        <span>Usuarios</span>
                     </a>
                 </li>
                 <li>
@@ -55,9 +61,15 @@ $data = $resultado->fetchAll(PDO::FETCH_ASSOC);
                     </a>
                 </li>
                 <li>
-                    <a href="#">
-                        <ion-icon name="document-text-outline"></ion-icon>
-                        <span>Documentos</span>
+                    <a href="materias.php">
+                        <ion-icon name="library-outline"></ion-icon>
+                        <span>Materias</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="profesores.php">
+                        <ion-icon name="easel-outline"></ion-icon>
+                        <span>Profesores</span>
                     </a>
                 </li>
                 <li>

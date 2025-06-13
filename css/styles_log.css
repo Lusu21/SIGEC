@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@500&display=swap');
+
+body {
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            background-image: url("../img/1.jpg");
+            background-size: cover;
+            background-position: center;
+            padding-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 30px;
+            background-color: rgba(99, 153, 206, 0.466);
+            border-radius: 15px;
+            padding-top: 10px;
+            padding-right: 100PX;
+            padding-left: 80px;
+            padding-bottom: 15px;
+            margin-top: 15px;
+        }
+
+        .login-from-img {
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+        
+        .accordion {
+            padding: 20px;
+            color: white;
+            margin-top: 1px;
+            font-size: 13px;
+            width: 400px;
+        }
+
+        h2 {
+            margin-top: 0px;
+            margin-bottom: 1px;
+        }
+
+        .login-form {
+            align-items: center;
+            box-shadow: 16px 10px 10px #003366;
+            margin-top: 0px;
+            width: 350px;
+        }
+
+        .input-group {
+            display: flex;
+            align-items: center;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            padding: 6px 10px;
+            background-color: #f9f9f9;
+            width: 300px;
+        }
+
+        .input-group ion-icon {
+            font-size: 20px;
+            color: #003366;
+            /* azul oscuro */
+            margin-right: 12px;
+        }
+
+        .input-group input {
+            border: none;
+            outline: none;
+            flex: 1;
+            background: transparent;
+            font-size: 16px;
+            color: #333;
+            margin-top: 0px;
+            margin-bottom: 0px;
+
+        }
+
+        .login-form-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            width: min-content;
+        }
+
+        button {
+            padding: 10px 14px;
+            border: none;
+            background-color: #003366;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 1px;
+            margin-bottom: 1px;
+        }
+
+        button:hover {
+            background-color: #002244;
+        }
+
+        .alert {
+            text-align: center;
+            margin-top: 1px;
+            margin-bottom: 1px;
+            border-radius: 8px;
+            /* Esquinas redondeadas */
+            padding: 10px;
+            font-size: 0.95rem;
+        }
+
+        .alert p {
+            margin-bottom: 0;
+        }
+
+        .alert svg {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+
+        footer {
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgb(255, 255, 255);
+            padding: 15px;
+            text-align: center;
+            font-size: 0.85rem;
+            z-index: 1000;
+            box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 100) {
+            .main-container {
+                flex-direction: column;
+                align-items: center;
+
+            }
+
+            .login-form-buttons {
+                flex-direction: column;
+            }
+        }
+
+        
